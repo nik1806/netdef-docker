@@ -64,3 +64,4 @@ Make sure you have read/write rights for the current folder. Run the `run-networ
 ## 4. License
 The files in this repository are under the [GNU General Public License v3.0](LICENSE)
 
+** The repository supports automatic build on Github (using actions) and publish it directly on Docker Hub.**
