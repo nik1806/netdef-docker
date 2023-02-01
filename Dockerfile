@@ -8,6 +8,8 @@ FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu18.04
 VOLUME "/input"
 VOLUME "/output"
 
+RUN apt-get update && apt-get install -y --no-install-recommends apt-utils
+
 RUN apt update                             && \
     apt install -y --no-install-recommends    \
     python3                                   \
@@ -19,35 +21,37 @@ RUN apt update                             && \
     libeigen3-dev                             \
     sudo
 
-## Switch to non-root user 
-ARG uid
-ARG gid
-ENV uid=${uid}
-ENV gid=${gid}
-ENV USER=netdef
-RUN groupadd -g $gid $USER                                              && \
-    mkdir -p /home/$USER                                                && \
-    echo "${USER}:x:${uid}:${gid}:${USER},,,:/home/${USER}:/bin/bash"      \
-         >> /etc/passwd                                                 && \
-    echo "${USER}:x:${uid}:"                                               \
-         >> /etc/group                                                  && \
-    echo "${USER} ALL=(ALL) NOPASSWD: ALL"                                 \
-         > /etc/sudoers.d/${USER}                                       && \
-    chmod 0440 /etc/sudoers.d/${USER}                                   && \
-    chown ${uid}:${gid} -R /home/${USER}
+# ## Switch to non-root user 
+# ARG uid
+# ARG gid
+# ENV uid=${uid}
+# ENV gid=${gid}
+# ENV USER=netdef
+# RUN groupadd -g $gid $USER                                              && \
+#     mkdir -p /home/$USER                                                && \
+#     echo "${USER}:x:${uid}:${gid}:${USER},,,:/home/${USER}:/bin/bash"      \
+#          >> /etc/passwd                                                 && \
+#     echo "${USER}:x:${uid}:"                                               \
+#          >> /etc/group                                                  && \
+#     echo "${USER} ALL=(ALL) NOPASSWD: ALL"                                 \
+#          > /etc/sudoers.d/${USER}                                       && \
+#     chmod 0440 /etc/sudoers.d/${USER}                                   && \
+#     chown ${uid}:${gid} -R /home/${USER}
 
-USER ${USER}
-ENV HOME=/home/${USER}
+# USER ${USER}
+# ENV HOME=/home/${USER}
 
-WORKDIR ${HOME}
+# WORKDIR ${HOME}
 
 COPY requirements.txt .
 RUN sudo curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py   && \
     sudo python3 get-pip.py                                        && \
     wget --no-check-certificate https://lmb.informatik.uni-freiburg.de/resources/binaries/tensorflow-binaries/tensorflow-1.11.0-cp36-cp36m-linux_x86_64.whl && \
     sudo -H pip3 install -r requirements.txt                       && \
-    sudo -H pip3 install ${HOME}/tensorflow-1.11.0-cp36-cp36m-linux_x86_64.whl && \
+    sudo -H pip3 install tensorflow-1.11.0-cp36-cp36m-linux_x86_64.whl && \
     sudo -H pip3 install scikit-learn pillow scipy
+    
+#     sudo -H pip3 install ${HOME}/tensorflow-1.11.0-cp36-cp36m-linux_x86_64.whl && \
 
 RUN git clone https://github.com/lmb-freiburg/lmbspecialops && \
     cd lmbspecialops                                        && \
