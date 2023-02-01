@@ -44,7 +44,7 @@ RUN apt update                             && \
 # WORKDIR ${HOME}
 
 COPY requirements.txt .
-RUN sudo curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py   && \
+RUN sudo curl https://bootstrap.pypa.io/pip/3.6/get-pip.py -o get-pip.py   && \
     sudo python3 get-pip.py                                        && \
     wget --no-check-certificate https://lmb.informatik.uni-freiburg.de/resources/binaries/tensorflow-binaries/tensorflow-1.11.0-cp36-cp36m-linux_x86_64.whl && \
     sudo -H pip3 install -r requirements.txt                       && \
