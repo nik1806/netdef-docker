@@ -40,8 +40,9 @@ RUN apt update                             && \
 
 # USER ${USER}
 # ENV HOME=/home/${USER}
+ENV HOME=/home/
 
-# WORKDIR ${HOME}
+WORKDIR ${HOME}
 
 COPY requirements.txt .
 RUN sudo curl https://bootstrap.pypa.io/pip/3.6/get-pip.py -o get-pip.py   && \
