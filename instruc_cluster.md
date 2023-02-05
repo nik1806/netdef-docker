@@ -6,7 +6,8 @@
 3. Copy `netdef_models` directory to the base directory (same location we start the container) because
 we don't have write access at root location.
 4. Enter respective model directory `cd /netdef_models/FlowNet3/CSSR-ft-sd/`.
-5. Run the model with command:
+5. Create output folder : `mkdir output`
+6. Run the model with command:
 ```
-python3 controller.py eval /data/0000001-imgL.png /data/0000001-imgR.png output/.
+python3 controller.py eval /home/nipa00002/netdef-docker/data/0000001-imgL.png /home/nipa00002/netdef-docker/data/0000001-imgR.png output/.
 ```
