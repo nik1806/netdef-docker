@@ -16,9 +16,9 @@ git checkout 7d3311579cf712b31d05ec29f3dc63df067aa07b   && \
 cd FlowNet3  && bash download_snapshots.sh && cd ..     
 
 # chose model
-cd /netdef_models/FlowNet3/CSSR-ft-sd/
+cd FlowNet3/CSSR-ft-sd/
 
-mkdir output
+mkdir output/
 
 # run model
 python3 controller.py eval \
