@@ -2,7 +2,7 @@
 # Author: Nikolaus Mayer (2018), mayern@cs.uni-freiburg.de
 #######################################################################
 
-FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu18.04
+FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu18.04@sha256:256841d97560d1f3b0712aeb3d42df46b383526ac765de557dac241030bbc878
 
 ## Container's mount points for the host's input/output folders
 VOLUME "/input"
